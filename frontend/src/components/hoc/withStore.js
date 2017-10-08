@@ -1,14 +1,31 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const store = createStore();
+const reducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return Object.assign({}, state, {
+        visibilityFilter: action.filter,
+      });
+    default:
+      return state;
+  }
+};
+
+const store = createStore(
+  combineReducers({
+    reducer,
+  }),
+);
 
 export default function withStore(WrappedComponent) {
   function WithStore(props) {
     return (
       <Provider store={store}>
-        <WrappedComponent {...props} />;
+        <div>
+          <WrappedComponent {...props} />;
+        </div>
       </Provider>
     );
   }
