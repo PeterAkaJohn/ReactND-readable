@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
+import withStore from './hoc/withStore';
 
 class App extends Component {
   componentDidMount() {}
@@ -19,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStore(App);
