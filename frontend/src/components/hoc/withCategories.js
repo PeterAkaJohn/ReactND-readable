@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { loadCategories } from '../common/common_actions';
 
 export default function withCategories(WrappedComponent) {
   class WithCategories extends Component {
@@ -17,16 +18,9 @@ export default function withCategories(WrappedComponent) {
   }
 
   function mapStateToProps(state) {
+    console.log(state);
     return {
       categories: state.categories,
-    };
-  }
-
-  function mapDispatchToProps(dispatch) {
-    return {
-      loadCategories: () => {
-        dispatch('LOADCATEGORIES');
-      },
     };
   }
 
@@ -34,5 +28,5 @@ export default function withCategories(WrappedComponent) {
     loadCategories: PropTypes.func.isRequired,
   };
 
-  return connect(mapStateToProps, mapDispatchToProps)(WithCategories);
+  return connect(mapStateToProps, { loadCategories })(WithCategories);
 }
