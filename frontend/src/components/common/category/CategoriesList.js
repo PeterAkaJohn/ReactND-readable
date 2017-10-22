@@ -6,8 +6,8 @@ import Category from './Category';
 function CategoriesList(props) {
   return (
     <div>
-      {props.categories.map(category => (
-        <Link to={`/categories/${category.id}`}>
+      {props.categories.map((category, index) => (
+        <Link key={index} to={`/categories/${category.path}`}>
           <Category category={category} />
         </Link>
       ))}

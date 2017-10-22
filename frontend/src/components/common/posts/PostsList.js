@@ -7,7 +7,7 @@ function PostsList(props) {
   return (
     <div>
       {props.posts.map(post => (
-        <Link to={`/posts/${post.id}`}>
+        <Link key={post.id} to={`/posts/${post.id}`}>
           <Post post={post} />
         </Link>
       ))}
