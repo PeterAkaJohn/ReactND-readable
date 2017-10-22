@@ -15,15 +15,15 @@ export default function withPosts(WrappedComponent) {
     render() {
       return (
         <div>
-          <WrappedComponent {...this.props} />;
+          <WrappedComponent {...this.props} />
         </div>
       );
     }
   }
 
-  function mapStateToProps(state, ownProps) {
+  function mapStateToProps(state) {
     return {
-      posts: ownProps.categoryId ? state.catPosts : state.posts,
+      posts: state.posts,
     };
   }
 

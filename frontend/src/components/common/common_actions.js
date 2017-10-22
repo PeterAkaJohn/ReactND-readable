@@ -1,7 +1,17 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://localhost:3001';
+
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+
+function buildPostsUrl(categoryId) {
+  let url = `${BASE_URL}/posts`;
+  if (categoryId) {
+    url = `${BASE_URL}/${categoryId}/posts`;
+  }
+  return url;
+}
 
 function onLoadPostsSuccess(posts) {
   return {
@@ -11,7 +21,8 @@ function onLoadPostsSuccess(posts) {
 }
 
 export function loadPosts(categoryId) {
-  const request = axios.get('http://localhost:3001/posts', {
+  const url = buildPostsUrl(categoryId);
+  const request = axios.get(url, {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 

@@ -11,14 +11,13 @@ export default function withCategories(WrappedComponent) {
     render() {
       return (
         <div>
-          <WrappedComponent {...this.props} />;
+          <WrappedComponent {...this.props} />
         </div>
       );
     }
   }
 
   function mapStateToProps(state) {
-    console.log(state);
     return {
       categories: state.categories,
     };
