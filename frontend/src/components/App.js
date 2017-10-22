@@ -4,6 +4,7 @@ import '../App.css';
 import withStore from './hoc/withStore';
 import Home from './root/Home';
 import CategoryDetail from './detail/CategoryDetail';
+import PostDetail from './detail/PostDetail';
 
 class App extends Component {
   componentDidMount() {}
@@ -14,6 +15,7 @@ class App extends Component {
           <div>
             <Route path="/" component={Home} exact />
             <Route path="/categories/:id" component={CategoryDetail} exact />
+            <Route path="/posts/:id" component={PostDetail} exact />
           </div>
         </Router>
       </div>
