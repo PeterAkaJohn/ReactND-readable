@@ -7,6 +7,10 @@ function buildPostUrl(postId) {
   return `${BASE_URL}/posts/${postId}`;
 }
 
+function buildCommentsUrl(postId) {
+  return `${BASE_URL}/posts/${postId}/comments`;
+}
+
 function onLoadPostSuccess(post) {
   return {
     type: LOAD_POST,
@@ -15,17 +19,30 @@ function onLoadPostSuccess(post) {
 }
 
 export function loadPost(postId) {
-  const url = buildPostUrl(postId);
-  const request = axios.get(url, {
+  let postData = {};
+  const postUrl = buildPostUrl(postId);
+  const postRequest = axios.get(postUrl, {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
   return (dispatch) => {
-    request.then(
-      ({ data }) => {
-        dispatch(onLoadPostSuccess(data));
-      },
-      error => console.log(error),
-    );
+    postRequest
+      .then(
+        (result) => {
+          postData = result.data;
+
+          return axios.get(buildCommentsUrl(postId), {
+            headers: { Authorization: 'pierpaolo-iannone' },
+          });
+        },
+        error => console.log(error),
+      )
+      .then(
+        (result) => {
+          postData.comments = result.data;
+          dispatch(onLoadPostSuccess(postData));
+        },
+        error => console.log(error),
+      );
   };
 }
