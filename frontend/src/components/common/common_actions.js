@@ -1,9 +1,12 @@
 import axios from 'axios';
+import uuidv1 from 'uuid/v1';
 
 export const BASE_URL = 'http://localhost:3001';
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+
+export const CREATE_POST = 'CREATE_POST';
 
 function buildPostsUrl(categoryId) {
   let url = `${BASE_URL}/posts`;
@@ -52,6 +55,36 @@ export function loadCategories() {
     request.then(
       ({ data }) => {
         dispatch(onLoadCategoriesSuccess(data));
+      },
+      error => console.log(error),
+    );
+  };
+}
+
+function onCreatePostSuccess(post) {
+  return {
+    type: CREATE_POST,
+    payload: post,
+  };
+}
+
+export function createPost() {
+  const newPost = {
+    id: uuidv1(),
+    timestamp: Date.now(),
+    title: 'HELLO BOB',
+    body: 'hello bobby',
+    author: 'bob',
+    category: 'react',
+  };
+  const request = axios.post(buildPostsUrl(), newPost, {
+    headers: { Authorization: 'pierpaolo-iannone' },
+  });
+
+  return (dispatch) => {
+    request.then(
+      ({ data }) => {
+        dispatch(onCreatePostSuccess(data));
       },
       error => console.log(error),
     );
