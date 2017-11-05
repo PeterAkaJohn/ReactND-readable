@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UserInteraction from '../UserInteraction';
 import withCategories from '../../hoc/withCategories';
+import withAddPostAction from '../../hoc/withAddPostAction';
 
 class AddPost extends Component {
   constructor() {
@@ -10,7 +10,9 @@ class AddPost extends Component {
     this.createPost = this.createPost.bind(this);
   }
   createPost() {
-    return this;
+    this.props.createPost().then((post) => {
+      this.props.history.push(`/posts/${post.id}`);
+    });
   }
   render() {
     return (
@@ -19,7 +21,7 @@ class AddPost extends Component {
           {this.props.categories &&
             this.props.categories.map(category => <li key={category.name}>{category.name}</li>)}
         </ul>
-        <UserInteraction {...this.props} />
+        <button onClick={this.createPost}>Add Post</button>
       </div>
     );
   }
@@ -27,6 +29,8 @@ class AddPost extends Component {
 
 AddPost.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  createPost: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
-export default withCategories(AddPost);
+export default withAddPostAction(withCategories(AddPost));
