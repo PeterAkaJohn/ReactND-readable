@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withPostAction from '../hoc/withPostAction';
+import withAddPostAction from '../hoc/withAddPostAction';
 
 class UserInteraction extends Component {
   constructor() {
@@ -8,7 +8,10 @@ class UserInteraction extends Component {
     this.createPost = this.createPost.bind(this);
   }
   createPost() {
-    this.props.createPost();
+    const createPost = Promise.resolve(this.props.createPost());
+    createPost.then(() => {
+      this.props.history.push('/');
+    });
   }
   render() {
     return (
@@ -21,6 +24,7 @@ class UserInteraction extends Component {
 
 UserInteraction.propTypes = {
   createPost: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
-export default withPostAction(UserInteraction);
+export default withAddPostAction(UserInteraction);
