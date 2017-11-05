@@ -11,8 +11,10 @@ class EditPostSection extends Component {
   }
 
   editPost() {
-    this.props.editPost(this.props.post.id);
-    this.props.history.push(`/posts/${this.props.post.id}`);
+    const editPost = Promise.resolve(this.props.editPost(this.props.post.id));
+    editPost.then(() => {
+      this.props.history.push('/');
+    });
   }
   render() {
     return (
