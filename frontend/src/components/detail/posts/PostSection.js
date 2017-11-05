@@ -12,8 +12,7 @@ class PostSection extends Component {
     this.downVotePost = this.downVotePost.bind(this);
   }
   deletePost() {
-    const deletePost = Promise.resolve(this.props.deletePost(this.props.post.id));
-    deletePost.then(() => {
+    this.props.deletePost(this.props.post.id).then(() => {
       this.props.history.push('/');
     });
   }

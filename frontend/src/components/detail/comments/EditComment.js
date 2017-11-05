@@ -7,8 +7,7 @@ class EditComment extends Component {
     this.editComment = this.editComment.bind(this);
   }
   editComment(event) {
-    const editComment = Promise.resolve(this.props.editComment(event.target.id, 'hello bob'));
-    editComment.then(() => {
+    this.props.editComment(event.target.id, 'hello bob').then(() => {
       this.props.history.push(`/posts/${this.props.post.id}`);
     });
   }

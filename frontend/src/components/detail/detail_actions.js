@@ -35,26 +35,24 @@ export function loadPost(postId) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
-    postRequest
-      .then(
-        (result) => {
-          postData = result.data;
+  return dispatch => postRequest
+    .then(
+      (result) => {
+        postData = result.data;
 
-          return axios.get(buildCommentsUrl(postId), {
-            headers: { Authorization: 'pierpaolo-iannone' },
-          });
-        },
-        error => console.log(error),
-      )
-      .then(
-        (result) => {
-          postData.comments = sortByVoteScore(result.data);
-          dispatch(onLoadPostSuccess(postData));
-        },
-        error => console.log(error),
-      );
-  };
+        return axios.get(buildCommentsUrl(postId), {
+          headers: { Authorization: 'pierpaolo-iannone' },
+        });
+      },
+      error => console.log(error),
+    )
+    .then(
+      (result) => {
+        postData.comments = sortByVoteScore(result.data);
+        dispatch(onLoadPostSuccess(postData));
+      },
+      error => console.log(error),
+    );
 }
 
 function onEditPost(post) {
@@ -74,14 +72,13 @@ export function editPost(postId, title, body) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     postRequest.then(
       () => {
         dispatch(onEditPost(editingPost));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onDeletePost(postId) {
@@ -97,14 +94,13 @@ export function deletePost(postId) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     postRequest.then(
       () => {
         dispatch(onDeletePost(postId));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onPostVoteSuccess(post) {
@@ -120,14 +116,13 @@ export function votePost(vote) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onPostVoteSuccess(data));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onCreateComment(comment) {
@@ -150,14 +145,13 @@ export function createComment(postId, body, author) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onCreateComment(data));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onEditComment(comment) {
@@ -174,14 +168,13 @@ export function editComment(commentId, body) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onEditComment(data));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onDeleteComment(commentId) {
@@ -196,14 +189,13 @@ export function deleteComment(commentId) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       () => {
         dispatch(onDeleteComment(commentId));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onCommentVoteSuccess(comment) {
@@ -218,12 +210,11 @@ export function voteComment(vote) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onCommentVoteSuccess(data));
       },
       error => console.log(error),
     );
-  };
 }

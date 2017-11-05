@@ -29,14 +29,13 @@ export function loadPosts(categoryId) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onLoadPostsSuccess(data));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onLoadCategoriesSuccess(categories) {
@@ -51,14 +50,13 @@ export function loadCategories() {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onLoadCategoriesSuccess(data));
       },
       error => console.log(error),
     );
-  };
 }
 
 function onCreatePostSuccess(post) {
@@ -72,8 +70,8 @@ export function createPost() {
   const newPost = {
     id: uuidv1(),
     timestamp: Date.now(),
-    title: 'HELLO BOB',
-    body: 'hello bobby',
+    title: 'HELLO BOB v2',
+    body: 'hello bobby v2',
     author: 'bob',
     category: 'react',
   };
@@ -81,12 +79,12 @@ export function createPost() {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return (dispatch) => {
+  return dispatch =>
     request.then(
       ({ data }) => {
         dispatch(onCreatePostSuccess(data));
+        return data;
       },
       error => console.log(error),
     );
-  };
 }

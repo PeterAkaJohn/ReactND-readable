@@ -8,9 +8,8 @@ class UserInteraction extends Component {
     this.createPost = this.createPost.bind(this);
   }
   createPost() {
-    const createPost = Promise.resolve(this.props.createPost());
-    createPost.then(() => {
-      this.props.history.push('/');
+    this.props.createPost().then((post) => {
+      this.props.history.push(`/posts/${post.id}`);
     });
   }
   render() {
