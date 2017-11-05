@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createPost } from '../common/common_actions';
 
-export default function withPostAction(WrappedComponent) {
-  function WithPostAction(props) {
+export default function withAddPostAction(WrappedComponent) {
+  function WithAddPostAction(props) {
     return (
       <div>
         <WrappedComponent {...props} />
@@ -11,5 +11,5 @@ export default function withPostAction(WrappedComponent) {
     );
   }
 
-  return connect(null, { createPost })(WithPostAction);
+  return connect(null, { createPost })(WithAddPostAction);
 }
