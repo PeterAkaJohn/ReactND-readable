@@ -1,5 +1,43 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  animation: colorchange 20s infinite; /* animation-name followed by duration in seconds*/
+  /* you could also use milliseconds (ms) or something like 2.5s */
+  -webkit-animation: colorchange 20s infinite; /* Chrome and Safari */
+}
+
+@keyframes colorchange {
+  0% {
+    background: #0091ea;
+  }
+  25% {
+    background: #00796b;
+  }
+  50% {
+    background: #7e57c2;
+  }
+  75% {
+    background: #d81b60;
+  }
+  100% {
+    background: #0091ea;
+  }
+}
+
+@-webkit-keyframes colorchange {
+  0% {
+    background: #0091ea;
+  }
+  10% {
+    background: #00796b;
+  }
+  50% {
+    background: #7e57c2;
+  }
+  85% {
+    background: #d81b60;
+  }
+  100% {
+    background: #0091ea;
+  }
 }

@@ -1,0 +1,9 @@
+.main-container a,
+.main-container a:hover,
+.main-container a:visited,
+.main-container a:focus,
+.main-container a:active {
+  text-decoration: none !important;
+  color: inherit;
+  outline: 0;
+}
