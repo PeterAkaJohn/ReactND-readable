@@ -1,9 +1,10 @@
-export default function sortByVoteScore(items) {
+export default function sortByFilter(items, filter) {
+  const filterByProperty = filter || 'voteScore';
   return items.sort((a, b) => {
-    if (a.voteScore < b.voteScore) {
+    if (a[filterByProperty] < b[filterByProperty]) {
       return 1;
     }
-    if (a.voteScore > b.voteScore) {
+    if (a[filterByProperty] > b[filterByProperty]) {
       return -1;
     }
 

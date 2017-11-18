@@ -1,7 +1,7 @@
 import axios from 'axios';
 import uuidv1 from 'uuid/v1';
 import { BASE_URL } from '../common/common_actions';
-import sortByVoteScore from '../../utils/helper';
+import sortByFilter from '../../utils/helper';
 
 export const LOAD_POST = 'LOAD_POST';
 export const EDIT_POST = 'EDIT_POST';
@@ -49,7 +49,7 @@ export function loadPost(postId) {
       )
       .then(
         (result) => {
-          postData.comments = sortByVoteScore(result.data);
+          postData.comments = sortByFilter(result.data);
           dispatch(onLoadPostSuccess(postData));
         },
         error => console.log(error),

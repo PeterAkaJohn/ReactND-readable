@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loadPosts } from '../common/common_actions';
+import { loadPosts, filterPosts } from '../common/common_actions';
 
 export default function withPosts(WrappedComponent) {
   class WithPosts extends Component {
@@ -36,5 +36,5 @@ export default function withPosts(WrappedComponent) {
     categoryId: '',
   };
 
-  return connect(mapStateToProps, { loadPosts })(WithPosts);
+  return connect(mapStateToProps, { loadPosts, filterPosts })(WithPosts);
 }

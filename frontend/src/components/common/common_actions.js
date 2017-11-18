@@ -3,10 +3,18 @@ import uuidv1 from 'uuid/v1';
 
 export const BASE_URL = 'http://localhost:3001';
 
+export const GET_FILTERED_POSTS = 'GET_FILTERED_POSTS';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
 
 export const CREATE_POST = 'CREATE_POST';
+
+export function filterPosts(filter) {
+  return {
+    type: GET_FILTERED_POSTS,
+    filter,
+  };
+}
 
 function buildPostsUrl(categoryId) {
   let url = `${BASE_URL}/posts`;

@@ -73,8 +73,17 @@
   float: right;
 }
 
+.post-filter-section {
+  position: absolute;
+  right: 50px;
+  text-transform: capitalize;
+}
+
 @media screen and (max-width: 762px) {
   .content-col {
     width: 100%;
+  }
+  .post-filter-section {
+    position: static;
   }
 }

@@ -8,7 +8,7 @@ import {
   DELETE_POST,
   VOTE_COMMENT,
 } from './detail_actions';
-import sortByVoteScore from '../../utils/helper';
+import sortByFilter from '../../utils/helper';
 
 export default function postReducer(state = {}, action) {
   switch (action.type) {
@@ -17,7 +17,7 @@ export default function postReducer(state = {}, action) {
     case CREATE_COMMENT:
       return {
         ...state,
-        comments: sortByVoteScore([...state.comments, action.payload]),
+        comments: sortByFilter([...state.comments, action.payload]),
       };
     case EDIT_POST:
       return {
@@ -43,7 +43,7 @@ export default function postReducer(state = {}, action) {
     case VOTE_COMMENT:
       return {
         ...state,
-        comments: sortByVoteScore(
+        comments: sortByFilter(
           state.comments.map((comment) => {
             if (comment.id === action.payload.id) {
               return action.payload;
