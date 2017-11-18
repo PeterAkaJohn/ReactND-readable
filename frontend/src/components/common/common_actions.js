@@ -66,14 +66,14 @@ function onCreatePostSuccess(post) {
   };
 }
 
-export function createPost() {
+export function createPost(postForm) {
   const newPost = {
     id: uuidv1(),
     timestamp: Date.now(),
-    title: 'HELLO BOB v2',
-    body: 'hello bobby v2',
-    author: 'bob',
-    category: 'react',
+    title: postForm.title,
+    body: postForm.body,
+    author: postForm.author,
+    category: postForm.category,
   };
   const request = axios.post(buildPostsUrl(), newPost, {
     headers: { Authorization: 'pierpaolo-iannone' },

@@ -35,24 +35,25 @@ export function loadPost(postId) {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
-  return dispatch => postRequest
-    .then(
-      (result) => {
-        postData = result.data;
+  return dispatch =>
+    postRequest
+      .then(
+        (result) => {
+          postData = result.data;
 
-        return axios.get(buildCommentsUrl(postId), {
-          headers: { Authorization: 'pierpaolo-iannone' },
-        });
-      },
-      error => console.log(error),
-    )
-    .then(
-      (result) => {
-        postData.comments = sortByVoteScore(result.data);
-        dispatch(onLoadPostSuccess(postData));
-      },
-      error => console.log(error),
-    );
+          return axios.get(buildCommentsUrl(postId), {
+            headers: { Authorization: 'pierpaolo-iannone' },
+          });
+        },
+        error => console.log(error),
+      )
+      .then(
+        (result) => {
+          postData.comments = sortByVoteScore(result.data);
+          dispatch(onLoadPostSuccess(postData));
+        },
+        error => console.log(error),
+      );
 }
 
 function onEditPost(post) {
@@ -62,20 +63,16 @@ function onEditPost(post) {
   };
 }
 
-export function editPost(postId, title, body) {
-  const editingPost = {
-    title,
-    body,
-  };
+export function editPost(postId, postForm) {
   const postUrl = buildPostUrl(postId);
-  const postRequest = axios.put(postUrl, editingPost, {
+  const postRequest = axios.put(postUrl, postForm, {
     headers: { Authorization: 'pierpaolo-iannone' },
   });
 
   return dispatch =>
     postRequest.then(
       () => {
-        dispatch(onEditPost(editingPost));
+        dispatch(onEditPost(postForm));
       },
       error => console.log(error),
     );
@@ -132,11 +129,11 @@ function onCreateComment(comment) {
   };
 }
 
-export function createComment(postId, body, author) {
+export function createComment(postId, commentForm) {
   const comment = {
     parentId: postId,
-    body,
-    author,
+    body: commentForm.body,
+    author: commentForm.author,
     timestamp: Date.now(),
     id: uuidv1(),
   };
