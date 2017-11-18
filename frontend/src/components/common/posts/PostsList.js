@@ -5,11 +5,13 @@ import Post from './Post';
 
 function PostsList(props) {
   return (
-    <div>
+    <div className="content-row posts-row">
       {props.posts.map(post => (
-        <Link key={post.id} to={`/posts/${post.id}`}>
-          <Post post={post} />
-        </Link>
+        <div key={post.id} className="content-col post-col">
+          <Link to={`/posts/${post.id}`}>
+            <Post post={post} />
+          </Link>
+        </div>
       ))}
     </div>
   );

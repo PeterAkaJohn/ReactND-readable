@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Button, Icon } from 'react-materialize';
 
 class Comment extends Component {
   constructor() {
@@ -10,40 +11,53 @@ class Comment extends Component {
     this.upVoteComment = this.upVoteComment.bind(this);
     this.downVoteComment = this.downVoteComment.bind(this);
   }
-  deleteComment(event) {
-    this.props.deleteComment(event.target.id);
+  deleteComment() {
+    this.props.deleteComment(this.props.comment.id);
   }
-  upVoteComment(event) {
+  upVoteComment() {
     const vote = {
       option: 'upVote',
-      commentId: event.target.id,
+      commentId: this.props.comment.id,
     };
 
     this.props.voteComment(vote);
   }
-  downVoteComment(event) {
+  downVoteComment() {
     const vote = {
       option: 'downVote',
-      commentId: event.target.id,
+      commentId: this.props.comment.id,
     };
 
     this.props.voteComment(vote);
   }
   render() {
     return (
-      <div>
-        {this.props.comment.body}
-        <Link to={`${this.props.match.url}/comments/${this.props.comment.id}`}> edit comment </Link>
-        <button id={this.props.comment.id} onClick={this.deleteComment}>
-          deleteComment
-        </button>
-        <button id={this.props.comment.id} onClick={this.upVoteComment}>
-          upVoteComment
-        </button>
-        <button id={this.props.comment.id} onClick={this.downVoteComment}>
-          downVoteComment
-        </button>
-        <div>{this.props.comment.voteScore}</div>
+      <div className="comment-content">
+        <div className="comment-body-section">
+          <div className="comment-body">{this.props.comment.body}</div>
+          <div className="comment-score">{this.props.comment.voteScore}</div>
+        </div>
+        <div className="comment-author">{this.props.comment.author}</div>
+        <div className="comment-cta-section">
+          <div className="comment-perma-cta">
+            <Link to={`${this.props.match.url}/comments/${this.props.comment.id}`}>
+              <Button>
+                <Icon>build</Icon>
+              </Button>
+            </Link>
+            <Button onClick={this.deleteComment}>
+              <Icon>clear</Icon>
+            </Button>
+          </div>
+          <div className="comment-voting-cta">
+            <Button onClick={this.upVoteComment}>
+              <Icon>thumb_up</Icon>
+            </Button>
+            <Button onClick={this.downVoteComment}>
+              <Icon>thumb_down</Icon>
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -54,6 +68,7 @@ Comment.propTypes = {
     id: PropTypes.string,
     body: PropTypes.string,
     voteScore: PropTypes.number,
+    author: PropTypes.string,
   }).isRequired,
   deleteComment: PropTypes.func.isRequired,
   voteComment: PropTypes.func.isRequired,

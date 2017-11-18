@@ -6,8 +6,11 @@ import withCategories from '../hoc/withCategories';
 
 function DisplayCategories(props) {
   return (
-    <div>
-      <CategoriesList categories={props.categories} />
+    <div className="display-content display-categories">
+      <div className="display-content-header">Categories</div>
+      <div className="display-content-body">
+        <CategoriesList categories={props.categories} />
+      </div>
     </div>
   );
 }

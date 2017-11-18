@@ -6,8 +6,11 @@ import withPosts from '../hoc/withPosts';
 
 function DisplayPosts(props) {
   return (
-    <div>
-      <PostsList posts={props.posts} />
+    <div className="display-content display-posts">
+      <div className="display-content-header">Posts</div>
+      <div className="display-content-body">
+        <PostsList posts={props.posts} />
+      </div>
     </div>
   );
 }

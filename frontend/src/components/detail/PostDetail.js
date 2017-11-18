@@ -6,6 +6,7 @@ import withPost from '../hoc/withPost';
 import PostSection from './posts/PostSection';
 import EditPostSection from './posts/EditPostSection';
 import CommentSection from './comments/CommentSection';
+import './posts/posts-detail.css';
 
 function PostDetail(props) {
   return (

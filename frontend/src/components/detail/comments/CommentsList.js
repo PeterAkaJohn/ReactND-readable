@@ -6,30 +6,28 @@ import EditComment from './EditComment';
 
 function CommentsList(props) {
   return (
-    <div>
-      <ol>
-        {props.comments &&
-          props.comments.map(comment => (
-            <li key={comment.id}>
-              <Switch>
-                <Route
-                  exact
-                  path={`${props.match.url}/comments/:commentId`}
-                  render={({ match }) => {
-                    if (match.params.commentId === comment.id) {
-                      return <EditComment comment={comment} {...props} />;
-                    }
-                    return <Comment comment={comment} {...props} />;
-                  }}
-                />
-                <Route
-                  path={`${props.match.url}/`}
-                  render={() => <Comment comment={comment} {...props} />}
-                />
-              </Switch>
-            </li>
-          ))}
-      </ol>
+    <div className="comment-section-list">
+      {props.comments &&
+        props.comments.map(comment => (
+          <div className="comment-item-container" key={comment.id}>
+            <Switch>
+              <Route
+                exact
+                path={`${props.match.url}/comments/:commentId`}
+                render={({ match }) => {
+                  if (match.params.commentId === comment.id) {
+                    return <EditComment comment={comment} {...props} />;
+                  }
+                  return <Comment comment={comment} {...props} />;
+                }}
+              />
+              <Route
+                path={`${props.match.url}/`}
+                render={() => <Comment comment={comment} {...props} />}
+              />
+            </Switch>
+          </div>
+        ))}
     </div>
   );
 }

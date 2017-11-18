@@ -1,33 +1,22 @@
 // connect to store
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import './comment.css';
 import withUserInteraction from '../../hoc/withUserInteraction';
 import CommentsList from './CommentsList';
+import CommentForm from './CommentForm';
 
-class CommentSection extends Component {
-  constructor() {
-    super();
-
-    this.submitComment = this.submitComment.bind(this);
-    this.editComment = this.editComment.bind(this);
-  }
-  submitComment() {
-    this.props.createComment(this.props.post.id);
-  }
-  editComment(event) {
-    this.props.editComment(event.target.id, 'hello bob');
-  }
-
-  render() {
-    return (
-      <div>
-        {this.props.post.comments && (
-          <CommentsList comments={this.props.post.comments} {...this.props} />
-        )}
-        <button onClick={this.submitComment}> create comment </button>
+function CommentSection(props) {
+  return (
+    <div className="comment-section">
+      <div className="comment-section-header white-text">Comments</div>
+      <div className="comments-number white-text">
+        There are {props.post.comments && props.post.comments.length} comments for this post
       </div>
-    );
-  }
+      <CommentForm {...props} />
+      {props.post.comments && <CommentsList comments={props.post.comments} {...props} />}
+    </div>
+  );
 }
 
 CommentSection.propTypes = {
