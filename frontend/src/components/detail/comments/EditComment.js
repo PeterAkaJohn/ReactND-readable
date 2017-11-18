@@ -1,24 +1,59 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Row } from 'react-materialize';
 
 class EditComment extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      body: props.comment.body,
+    };
+
     this.editComment = this.editComment.bind(this);
+
+    this.handleBodyChange = this.handleBodyChange.bind(this);
   }
+
   editComment(event) {
-    this.props.editComment(event.target.id, 'hello bob').then(() => {
+    event.preventDefault();
+    const { body } = this.state;
+    if (!body || body.length === 0) {
+      this.props.history.push(`/posts/${this.props.post.id}`);
+      return;
+    }
+    this.props.editComment(this.props.comment.id, body).then(() => {
+      this.setState({ body: '' });
       this.props.history.push(`/posts/${this.props.post.id}`);
     });
   }
 
+  handleBodyChange(event) {
+    this.setState({ body: event.target.value });
+  }
+
   render() {
     return (
-      <div>
-        EDITING COMMENT...
-        <button id={this.props.comment.id} onClick={this.editComment}>
-          EditComment
-        </button>
+      <div className="row row-edit-comment">
+        <form onSubmit={this.editComment}>
+          <Row>
+            <div className="input-field col s12">
+              <textarea
+                id="post-body"
+                className="materialize-textarea white-text"
+                data-length="120"
+                value={this.state.body}
+                onChange={this.handleBodyChange}
+              />
+              <label htmlFor="post-body" className="white-text">
+                Comment
+              </label>
+            </div>
+            <Button className="btn-submit-form" waves="light" type="submit">
+              Edit
+            </Button>
+          </Row>
+        </form>
       </div>
     );
   }
