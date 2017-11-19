@@ -49,8 +49,11 @@ export function loadPost(postId) {
       )
       .then(
         (result) => {
-          postData.comments = sortByFilter(result.data);
+          if (postData.id) {
+            postData.comments = sortByFilter(result.data);
+          }
           dispatch(onLoadPostSuccess(postData));
+          return postData;
         },
         error => console.log(error),
       );
