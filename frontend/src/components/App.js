@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import './common/common.css';
 import withStore from './hoc/withStore';
@@ -15,10 +15,12 @@ class App extends Component {
     return (
       <div className="main-container">
         <div>
-          <Route path="/" component={Home} exact />
-          <Route path="/add" component={AddPost} />
-          <Route path="/categories/:id" component={CategoryDetail} />
-          <Route path="/posts/:id" component={PostDetail} />
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/add" component={AddPost} exact />
+            <Route path="/:category" component={CategoryDetail} exact />
+            <Route path="/:category/:postId" component={PostDetail} />
+          </Switch>
         </div>
       </div>
     );
