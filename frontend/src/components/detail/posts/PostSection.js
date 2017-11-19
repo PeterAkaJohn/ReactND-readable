@@ -45,7 +45,7 @@ class PostSection extends Component {
         <div className="post-detail-cta-section">
           <div className="post-detail-ctas">
             <div className="post-detail-permanent-action">
-              <Link to={`/posts/${this.props.post.id}/edit`}>
+              <Link to={`/${this.props.post.category}/${this.props.post.id}/edit`}>
                 <Button>
                   <Icon>build</Icon>
                 </Button>
@@ -77,6 +77,7 @@ PostSection.propTypes = {
     comments: PropTypes.array,
     id: PropTypes.string,
     author: PropTypes.string,
+    category: PropTypes.string,
   }).isRequired,
   deletePost: PropTypes.func.isRequired,
   votePost: PropTypes.func.isRequired,

@@ -22,6 +22,7 @@ export default function withUserInteraction(WrappedComponent) {
   function mapStateToProps(state) {
     return {
       post: state.detail_post,
+      posts: state.posts,
     };
   }
 

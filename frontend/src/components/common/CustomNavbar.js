@@ -4,18 +4,10 @@ import { Navbar, Icon } from 'react-materialize';
 
 function CustomNavbar() {
   return (
-    <Navbar
-      className="deep-purple accent-2"
-      brand={
-        <div>
-          <Link to="/">
-            <Icon>arrow_back</Icon>
-          </Link>
-        </div>
-      }
-      fixed
-      right
-    >
+    <Navbar className="deep-purple accent-2" fixed right>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
       <li>
         <Link to="/add">Create Post</Link>
       </li>

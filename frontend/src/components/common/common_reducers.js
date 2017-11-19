@@ -1,4 +1,5 @@
 import { LOAD_POSTS, CREATE_POST, LOAD_CATEGORIES, GET_FILTERED_POSTS } from './common_actions';
+import { DELETE_POST, VOTE_POST } from '../detail/detail_actions';
 import sortByFilter from '../../utils/helper';
 
 export function postsReducer(state = [], action) {
@@ -9,6 +10,15 @@ export function postsReducer(state = [], action) {
       return sortByFilter([...state, action.payload]);
     case GET_FILTERED_POSTS:
       return sortByFilter([...state], action.filter);
+    case DELETE_POST:
+      return sortByFilter(state.filter(post => post.id !== action.payload));
+    case VOTE_POST:
+      return sortByFilter(
+        state.map((post) => {
+          if (post.id === action.payload.id) return action.payload;
+          return post;
+        }),
+      );
     default:
       return state;
   }

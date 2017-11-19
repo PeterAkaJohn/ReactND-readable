@@ -8,7 +8,7 @@ function PostsList(props) {
     <div className="content-row posts-row">
       {props.posts.map(post => (
         <div key={post.id} className="content-col post-col">
-          <Link to={`/posts/${post.id}`}>
+          <Link to={`/${post.category}/${post.id}`}>
             <Post post={post} />
           </Link>
         </div>

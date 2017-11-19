@@ -6,7 +6,7 @@ import { loadPost } from '../detail/detail_actions';
 export default function withPost(WrappedComponent) {
   class WithPost extends Component {
     componentDidMount() {
-      this.props.loadPost(this.props.match.params.id);
+      this.props.loadPost(this.props.match.params.postId);
     }
     render() {
       return (
@@ -26,7 +26,7 @@ export default function withPost(WrappedComponent) {
   WithPost.propTypes = {
     loadPost: PropTypes.func.isRequired,
     post: PropTypes.shape({ id: PropTypes.string }).isRequired,
-    match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
+    match: PropTypes.shape({ params: PropTypes.shape({ postId: PropTypes.string }) }).isRequired,
   };
 
   return connect(mapStateToProps, {

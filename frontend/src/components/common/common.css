@@ -35,6 +35,18 @@
   right: 10px;
 }
 
+.post-card-ctas {
+  position: absolute;
+  left: 5px;
+  bottom: 10px;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
 .home-section .display-categories,
 .home-section .display-posts {
   padding-bottom: 30px;
@@ -61,7 +73,7 @@
   padding-bottom: 10px;
 }
 
-.content-col a {
+.content-col > a {
   display: block;
   width: 80%;
   height: 100%;
@@ -86,4 +98,8 @@
   .post-filter-section {
     position: static;
   }
+}
+
+#sidenav-overlay {
+  z-index: 0;
 }

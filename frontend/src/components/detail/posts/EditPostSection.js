@@ -33,12 +33,12 @@ class EditPostSection extends Component {
       postForm.title.length === 0 ||
       postForm.body.length === 0
     ) {
-      this.props.history.push(`/posts/${this.props.post.id}`);
+      this.props.history.push(`/${this.props.post.category}/${this.props.post.id}`);
       return;
     }
     this.props.editPost(this.props.post.id, postForm).then(() => {
       this.setState({ title: '', body: '', author: '' });
-      this.props.history.push(`/posts/${this.props.post.id}`);
+      this.props.history.push(`/${this.props.post.category}/${this.props.post.id}`);
     });
   }
 
@@ -92,6 +92,7 @@ EditPostSection.propTypes = {
     comments: PropTypes.array,
     author: PropTypes.string,
     id: PropTypes.string,
+    category: PropTypes.string,
   }).isRequired,
   editPost: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,

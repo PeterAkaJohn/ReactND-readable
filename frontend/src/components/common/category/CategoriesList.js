@@ -8,7 +8,7 @@ function CategoriesList(props) {
     <div className="content-row categories-row">
       {props.categories.map(category => (
         <div key={category.name} className="content-col category-col">
-          <Link to={`/categories/${category.path}`}>
+          <Link to={`/${category.path}`}>
             <Category category={category} />
           </Link>
         </div>
