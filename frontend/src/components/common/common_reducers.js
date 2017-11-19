@@ -21,7 +21,9 @@ export function postsReducer(state = [], action) {
     case VOTE_POST:
       return sortByFilter(
         state.map((post) => {
-          if (post.id === action.payload.id) return action.payload;
+          if (post.id === action.payload.id) {
+            return { ...action.payload, commentsNumber: post.commentsNumber };
+          }
           return post;
         }),
       );
