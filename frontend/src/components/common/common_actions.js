@@ -6,6 +6,7 @@ export const BASE_URL = 'http://localhost:3001';
 export const GET_FILTERED_POSTS = 'GET_FILTERED_POSTS';
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
+export const POST_COMMENT_NUMBER = 'POST_COMMENT_NUMBER';
 
 export const CREATE_POST = 'CREATE_POST';
 
@@ -91,6 +92,28 @@ export function createPost(postForm) {
     request.then(
       ({ data }) => {
         dispatch(onCreatePostSuccess(data));
+        return data;
+      },
+      error => console.log(error),
+    );
+}
+
+function onGetCommentsNumber(comments, postId) {
+  return {
+    type: POST_COMMENT_NUMBER,
+    payload: { commentsNumber: comments.length, postId },
+  };
+}
+
+export function getCommentNumber(postId) {
+  const request = axios.get(`${BASE_URL}/posts/${postId}/comments`, {
+    headers: { Authorization: 'pierpaolo-iannone' },
+  });
+
+  return dispatch =>
+    request.then(
+      ({ data }) => {
+        dispatch(onGetCommentsNumber(data, postId));
         return data;
       },
       error => console.log(error),

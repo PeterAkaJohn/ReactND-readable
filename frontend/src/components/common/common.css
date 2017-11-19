@@ -91,6 +91,13 @@
   text-transform: capitalize;
 }
 
+.card-posts-comments {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 762px) {
   .content-col {
     width: 100%;
